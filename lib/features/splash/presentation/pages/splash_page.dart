@@ -20,7 +20,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
 
-    pageCubit.checkUserStatus();
+    pageCubit.init();
   }
 
   @override

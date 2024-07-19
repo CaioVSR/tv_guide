@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:tv_guide/features/splash/domain/use_cases/user_is_logged_use_case.dart';
@@ -12,14 +14,28 @@ class SplashPageCubit extends Cubit<SplashPageState> {
   final UserIsLoggedUseCase _userIsLoggedUseCase;
 
   /// Checks if the user is logged in and updates the state accordingly.
-  Future<void> checkUserStatus() async {
-    emit(SplashLoading());
+  Future<void> init() async {
+    try {
+      final promises = <Future<dynamic>>[];
 
-    final isLogged = await _userIsLoggedUseCase();
+      emit(SplashLoading());
 
-    if (isLogged) {
-      emit(SplashAuthenticated());
-    } else {
+      promises.addAll([
+        Future.delayed(const Duration(seconds: 2)),
+        _userIsLoggedUseCase.call(),
+      ]);
+
+      await Future.wait(promises);
+
+      final isUserLogged = promises[1] as bool;
+
+      if (isUserLogged) {
+        emit(SplashAuthenticated());
+      } else {
+        emit(SplashUnauthenticated());
+      }
+    } catch (e) {
+      log('Error checking user status: $e');
       emit(SplashUnauthenticated());
     }
   }
