@@ -20,6 +20,7 @@ class AppWidget extends StatelessWidget {
       routerConfig: AppRouter.routerConfig,
       theme: ThemeData(
         useMaterial3: true,
+        scaffoldBackgroundColor: const Color(0xffeef3f5),
       ),
     );
   }
