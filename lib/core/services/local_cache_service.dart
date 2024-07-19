@@ -37,4 +37,14 @@ class LocalCacheService {
   /// Throws an [Exception] if the read operation fails.
   /// 
   Future<String?> read({required String key}) => _storage.read(key: key);
+
+  /// Deletes a value from the secure storage for the given [key].
+  /// 
+  /// Example usage:
+  /// ```dart
+  /// await localCacheService.delete(key: 'username');
+  /// 
+  /// Throws an [Exception] if the delete operation fails.
+  /// 
+  Future<void> delete({required String key}) => _storage.delete(key: key);
 }
