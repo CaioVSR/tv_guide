@@ -1,7 +1,10 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:tv_guide/app/app_route_manager.dart';
+import 'package:tv_guide/features/splash/presentation/cubit/splash_page_cubit.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -11,24 +14,31 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  final pageCubit = GetIt.I.get<SplashPageCubit>();
+
   @override
   void initState() {
     super.initState();
 
-    Future.delayed(
-      const Duration(seconds: 2),
-      () {
-        context.goToLogin();
-      },
-    );
+    pageCubit.checkUserStatus();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Image.asset(
-          'assets/images/logo_full.png',
+    return BlocListener<SplashPageCubit, SplashPageState>(
+      bloc: pageCubit,
+      listener: (context, state) {
+        if (state is SplashAuthenticated) {
+          context.goToHome();
+        } else if (state is SplashUnauthenticated) {
+          context.goToLogin();
+        }
+      },
+      child: Scaffold(
+        body: Center(
+          child: Image.asset(
+            'assets/images/logo_full.png',
+          ),
         ),
       ),
     );
