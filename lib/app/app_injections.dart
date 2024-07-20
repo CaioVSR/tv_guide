@@ -2,6 +2,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tv_guide/core/services/local_cache_service.dart';
 import 'package:tv_guide/core/services/user_credentials_manager.dart';
+import 'package:tv_guide/features/auth/auth_feature_setup.dart';
 import 'package:tv_guide/features/splash/splash_feature_setup.dart';
 
 /// The [AppInjections] class is responsible for setting up dependency injections for the app.
@@ -22,5 +23,7 @@ class AppInjections {
 
     // FEATURE-SPECIFIC INJECTIONS
     SplashFeatureSetup.setupInjections();
+
+    AuthFeatureSetup.setupInjections();
   }
 }
