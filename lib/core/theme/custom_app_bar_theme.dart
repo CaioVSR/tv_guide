@@ -9,5 +9,9 @@ class CustomAppBarTheme extends AppBarTheme {
   /// Creates an instance of [CustomAppBarTheme].
   ///
   /// The constructor sets the background color of the AppBar to the color defined in [AppColors.background].
-  const CustomAppBarTheme() : super(backgroundColor: AppColors.background);
+  const CustomAppBarTheme()
+      : super(
+          backgroundColor: AppColors.background,
+          surfaceTintColor: AppColors.background,
+        );
 }

@@ -7,15 +7,15 @@ import 'package:tv_guide/features/auth/domain/use_cases/authenticate_use_case.da
 import 'package:tv_guide/features/auth/presentation/cubit/login_cubit.dart';
 import 'package:tv_guide/features/auth/presentation/cubit/visibility_cubit.dart';
 
-/// The [AuthFeatureSetup] for setting up the dependency injections for the Splash feature.
+/// The [AuthFeatureSetup] class sets up the dependency injections for the Auth feature.
 ///
 /// This class uses the `GetIt` package to register the necessary data sources,
-/// repositories, and use cases required by the Splash feature.
+/// repositories, and use cases required by the Auth feature.
 class AuthFeatureSetup {
   /// Private constructor to prevent instantiation of this class.
   const AuthFeatureSetup._();
 
-  /// Sets up the dependency injections for the Splash feature.
+  /// Sets up the dependency injections for the Auth feature.
   ///
   /// This method registers the following dependencies:
   /// - [AuthLocalDataSource]: The data source for fetching user credentials from the local cache.
@@ -31,9 +31,10 @@ class AuthFeatureSetup {
   /// ```
   static void setupInjections() {
     GetIt.I
+      ..pushNewScope()
       // DATA SOURCES
       ..registerLazySingleton<AuthLocalDataSource>(() => AuthLocalDataSourceImpl(GetIt.I.get()))
-      ..registerLazySingleton<AuthRemoteDataSource>( AuthRemoteDataSourceImpl.new)
+      ..registerLazySingleton<AuthRemoteDataSource>(AuthRemoteDataSourceImpl.new)
 
       // REPOSITORIES
       ..registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(GetIt.I.get(), GetIt.I.get()))
@@ -44,5 +45,13 @@ class AuthFeatureSetup {
       // CUBITS
       ..registerLazySingleton<VisibilityCubit>(VisibilityCubit.new)
       ..registerLazySingleton<LoginCubit>(() => LoginCubit(GetIt.I.get()));
+  }
+
+  /// Disposes of the current scope of the dependency injections.
+  ///
+  /// This method pops the current scope from the stack, cleaning up any dependencies
+  /// that were registered within that scope.
+  static Future<void> dispose() async {
+    await GetIt.I.popScope();
   }
 }

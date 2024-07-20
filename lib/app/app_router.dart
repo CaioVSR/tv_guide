@@ -1,9 +1,12 @@
 import 'package:go_router/go_router.dart';
 import 'package:tv_guide/app/app_route_manager.dart';
+import 'package:tv_guide/features/auth/auth_feature_setup.dart';
 import 'package:tv_guide/features/auth/presentation/pages/login_page.dart';
+import 'package:tv_guide/features/home/home_feature_setup.dart';
 import 'package:tv_guide/features/home/presentation/pages/details_page.dart';
 import 'package:tv_guide/features/home/presentation/pages/home_page/home_page.dart';
 import 'package:tv_guide/features/splash/presentation/pages/splash_page.dart';
+import 'package:tv_guide/features/splash/splash_feature_setup.dart';
 
 /// The [AppRouter] class is responsible for setting up the application's routing configuration.
 ///
@@ -28,17 +31,33 @@ class AppRouter {
       GoRoute(
         name: AppRouteManager.splashRouteName,
         path: '/',
-        builder: (context, state) => const SplashPage(),
+        builder: (context, state) {
+          SplashFeatureSetup.setupInjections();
+
+          return const SplashPage();
+        },
       ),
       GoRoute(
         name: AppRouteManager.loginRouteName,
         path: '/${AppRouteManager.loginRouteName}',
-        builder: (context, state) => const LoginPage(),
+        builder: (context, state) {
+          AuthFeatureSetup.setupInjections();
+
+          return const LoginPage();
+        },
       ),
       GoRoute(
         name: AppRouteManager.homeRouteName,
         path: '/${AppRouteManager.homeRouteName}',
-        builder: (context, state) => const HomePage(),
+        builder: (context, state) {
+          HomeFeatureSetup.setupInjections();
+
+          return const HomePage();
+        },
+        onExit: (context, state) async {
+          await HomeFeatureSetup.dispose();
+          return true;
+        },
         routes: [
           GoRoute(
             name: AppRouteManager.showDetailsRouteName,

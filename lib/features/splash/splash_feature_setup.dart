@@ -26,6 +26,7 @@ class SplashFeatureSetup {
   /// ```
   static void setupInjections() {
     GetIt.I
+      ..pushNewScope()
       // DATA SOURCES
       ..registerLazySingleton<CacheDataSource>(() => CacheDataSourceImp(GetIt.I.get()))
 
@@ -37,5 +38,13 @@ class SplashFeatureSetup {
 
       // CUBITS
       ..registerLazySingleton<SplashPageCubit>(() => SplashPageCubit(GetIt.I.get()));
+  }
+
+  /// Disposes of the current scope of the dependency injections.
+  ///
+  /// This method pops the current scope from the stack, cleaning up any dependencies
+  /// that were registered within that scope.
+  static Future<void> dispose() async {
+    await GetIt.I.popScope();
   }
 }

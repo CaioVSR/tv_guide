@@ -1,10 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tv_guide/core/services/local_cache_service.dart';
 import 'package:tv_guide/core/services/user_credentials_manager.dart';
-import 'package:tv_guide/features/auth/auth_feature_setup.dart';
-import 'package:tv_guide/features/home/home_feature_setup.dart';
-import 'package:tv_guide/features/splash/splash_feature_setup.dart';
 
 /// The [AppInjections] class is responsible for setting up dependency injections for the app.
 class AppInjections {
@@ -20,13 +18,8 @@ class AppInjections {
     GetIt.I
       ..registerSingleton<FlutterSecureStorage>(const FlutterSecureStorage())
       ..registerSingleton<LocalCacheService>(LocalCacheService(GetIt.I.get()))
-      ..registerSingleton<UserCredentialsManager>(UserCredentialsManager(GetIt.I.get()));
+      ..registerSingleton<UserCredentialsManager>(UserCredentialsManager(GetIt.I.get()))
+      ..registerLazySingleton<Dio>(Dio.new);
 
-    // FEATURE-SPECIFIC INJECTIONS
-    SplashFeatureSetup.setupInjections();
-
-    AuthFeatureSetup.setupInjections();
-
-    HomeFeatureSetup.setupInjections();
   }
 }
