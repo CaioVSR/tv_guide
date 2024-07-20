@@ -21,7 +21,7 @@ abstract class ShowsDataSource {
 class ShowsDataSourceImpl implements ShowsDataSource {
   /// Creates an instance of [ShowsDataSourceImpl].
   ///
-  /// The [client] parameter is required and is used to perform HTTP requests.
+  /// The [Dio] parameter is required and is used to perform HTTP requests.
   const ShowsDataSourceImpl(this._client);
 
   /// The Dio HTTP client used to perform HTTP requests.
@@ -36,7 +36,7 @@ class ShowsDataSourceImpl implements ShowsDataSource {
   /// Returns a [Future] that completes with the [Response] containing the fetched data.
   @override
   Future<Response<dynamic>> fetchShows({required String name}) async {
-    final response = await _client.get('https://api.tvmaze.com/search/shows?q=$name');
+    final response = await _client.get<dynamic>('https://api.tvmaze.com/search/shows?q=$name');
     
     return response;
   }

@@ -5,8 +5,8 @@
 class ShowSummaryEntity {
   /// Creates an instance of [ShowSummaryEntity].
   ///
-  /// The [title] and [imageUrl] parameters are required, while the [averageScore]
-  /// parameter is optional.
+  /// The [title] parameter is required and represents the title of the TV show.
+  /// The [imageUrl] parameter is optional and represents the URL of the image
   ShowSummaryEntity({
     required this.title,
     this.imageUrl,

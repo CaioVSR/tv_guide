@@ -14,7 +14,7 @@ part 'home_page_state.dart';
 class HomePageCubit extends Cubit<HomePageState> {
   /// Creates an instance of [HomePageCubit].
   ///
-  /// The [logOutUseCase] and [fetchShowsUseCase] parameters are required to perform
+  /// The [LogOutUseCase] and [FetchShowsUseCase] parameters are required to perform
   /// the logout operation and fetch shows, respectively.
   HomePageCubit(this._logOutUseCase, this._fetchShowsUseCase) : super(HomePageState.initial());
 
