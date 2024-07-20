@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:tv_guide/core/theme/app_colors.dart';
+import 'package:tv_guide/core/widgets/loading_widget.dart';
 
 /// The [CustomScaffold] widget wraps a [Scaffold] and provides an overlay
 /// portal that can display a loading animation when required. This widget
@@ -54,15 +55,7 @@ class CustomScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return OverlayPortal(
       controller: overlayPortalController,
-      overlayChildBuilder: (context) => ColoredBox(
-        color: AppColors.background.withOpacity(0.8),
-        child: Center(
-          child: LoadingAnimationWidget.staggeredDotsWave(
-            color: AppColors.primaryVariant,
-            size: 64,
-          ),
-        ),
-      ),
+      overlayChildBuilder: (context) => const LoadingWidget(),
       child: Scaffold(
         appBar: appBar,
         body: Padding(
