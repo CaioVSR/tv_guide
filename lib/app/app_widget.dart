@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tv_guide/app/app_router.dart';
+import 'package:tv_guide/core/theme/app_colors.dart';
 
 /// A root widget for the application.
 ///
@@ -20,7 +21,7 @@ class AppWidget extends StatelessWidget {
       routerConfig: AppRouter.routerConfig,
       theme: ThemeData(
         useMaterial3: true,
-        scaffoldBackgroundColor: const Color(0xffeef3f5),
+        scaffoldBackgroundColor: AppColors.background,
       ),
     );
   }
