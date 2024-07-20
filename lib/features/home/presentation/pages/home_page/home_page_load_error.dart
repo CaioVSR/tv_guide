@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs
+
 import 'package:flutter/material.dart';
 import 'package:tv_guide/core/theme/app_colors.dart';
 import 'package:tv_guide/core/theme/app_images_paths.dart';

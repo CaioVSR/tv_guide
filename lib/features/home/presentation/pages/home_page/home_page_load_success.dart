@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs
+
 import 'package:flutter/material.dart';
 import 'package:tv_guide/features/home/domain/entities/show_summary_entity.dart';
 
@@ -17,7 +19,7 @@ class HomePageLoadSuccess extends StatelessWidget {
       );
     }
 
-    return SingleChildScrollView(
+    return const SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
       ),
