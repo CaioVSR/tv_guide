@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tv_guide/app/app_router.dart';
 import 'package:tv_guide/core/theme/app_colors.dart';
+import 'package:tv_guide/core/theme/app_elevated_button_theme.dart';
+import 'package:tv_guide/core/theme/app_input_decoration_theme.dart';
 
 /// A root widget for the application.
 ///
@@ -22,6 +25,10 @@ class AppWidget extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         scaffoldBackgroundColor: AppColors.background,
+        elevatedButtonTheme: AppElevatedButtonTheme(context),
+        inputDecorationTheme: AppInputDecorationTheme(context),
+        textSelectionTheme: const TextSelectionThemeData(cursorColor: AppColors.primaryVariant),
+        textTheme: GoogleFonts.poppinsTextTheme(),
       ),
     );
   }

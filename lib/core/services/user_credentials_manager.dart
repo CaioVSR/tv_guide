@@ -18,7 +18,10 @@ class UserCredentialsManager {
   static const _userKey = 'user_data';
 
   /// An instance of [UserCredentialsModel] representing the user's credentials.
-  UserCredentialsModel? userCredentials;
+  UserCredentialsModel? _userCredentials;
+
+  /// Returns the user's credentials.
+  UserCredentialsModel? get userCredentials => _userCredentials;
 
   /// Loads the user's credentials from the local cache.
   ///
@@ -33,10 +36,10 @@ class UserCredentialsManager {
     final rawUserData = await _localCacheService.read(key: _userKey);
 
     if (rawUserData != null && rawUserData.isNotEmpty) {
-      final decodedData = json.decode(rawUserData);
+      final decodedData = jsonDecode(rawUserData);
 
-      if (decodedData.runtimeType == Map<String, dynamic>) {
-        userCredentials = UserCredentialsModel.fromJson(decodedData as Map<String, dynamic>);
+      if (decodedData is Map<String, dynamic>) {
+        _userCredentials = UserCredentialsModel.fromJson(decodedData);
       } else {
         // If there is an error in decoding, delete the corrupted data
         await _localCacheService.delete(key: _userKey);
@@ -46,26 +49,28 @@ class UserCredentialsManager {
 
   /// Saves the user's credentials to the local cache.
   ///
-  /// This method encodes the [userCredentials] instance into a JSON string and stores it in the local cache.
+  /// This method encodes the [_userCredentials] instance into a JSON string and stores it in the local cache.
   ///
   /// Example usage:
   /// ```dart
   /// await userCredentialsManager.saveUserCredentials();
   /// ```
-  Future<void> saveUserCredentials() async {
-    await _localCacheService.save(key: _userKey, value: json.encode(userCredentials?.toJson()));
+  Future<void> saveUserCredentials(UserCredentialsModel newCredentials) async {
+    await _localCacheService.save(key: _userKey, value: jsonEncode(newCredentials.toJson()));
+
+    _userCredentials = newCredentials;
   }
 
   /// Clears the user's credentials from memory and local cache.
   ///
-  /// This method sets the [userCredentials] to null and deletes the stored data from the local cache.
+  /// This method sets the [_userCredentials] to null and deletes the stored data from the local cache.
   ///
   /// Example usage:
   /// ```dart
   /// await userCredentialsManager.clearUserCredentials();
   /// ```
   Future<void> clearUserCredentials() async {
-    userCredentials = null;
+    _userCredentials = null;
     await _localCacheService.delete(key: _userKey);
   }
 }

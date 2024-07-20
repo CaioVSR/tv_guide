@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tv_guide/app/app_route_manager.dart';
+import 'package:tv_guide/core/theme/app_images_paths.dart';
 import 'package:tv_guide/features/splash/presentation/cubit/splash_page_cubit.dart';
 
 class SplashPage extends StatefulWidget {
@@ -19,8 +20,13 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-
     pageCubit.init();
+  }
+
+  @override
+  void dispose() {
+    pageCubit.close();
+    super.dispose();
   }
 
   @override
@@ -36,8 +42,9 @@ class _SplashPageState extends State<SplashPage> {
       },
       child: Scaffold(
         body: Center(
-          child: Image.asset(
-            'assets/images/logo_full.png',
+          child: Hero(
+            tag: AppImagePaths.logoFull,
+            child: Image.asset(AppImagePaths.logoFull),
           ),
         ),
       ),

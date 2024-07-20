@@ -16,16 +16,12 @@ class SplashPageCubit extends Cubit<SplashPageState> {
   /// Checks if the user is logged in and updates the state accordingly.
   Future<void> init() async {
     try {
-      final promises = <Future<dynamic>>[];
-
       emit(SplashLoading());
 
-      promises.addAll([
-        Future.delayed(const Duration(seconds: 2)),
+      final promises = await Future.wait([
+        Future<void>.delayed(const Duration(seconds: 2)),
         _userIsLoggedUseCase.call(),
-      ]);
-
-      await Future.wait(promises);
+      ]) as List<dynamic>;
 
       final isUserLogged = promises[1] as bool;
 
