@@ -45,6 +45,7 @@ class HomePageState {
   const HomePageState({
     required this.pageStatus,
     required this.logOutStatus,
+    required this.showsList,
   });
 
   /// Factory constructor for the initial state of the home page.
@@ -53,6 +54,7 @@ class HomePageState {
     return const HomePageState(
       pageStatus: HomePageStatus.initial,
       logOutStatus: HomePageStatus.initial,
+      showsList: [],
     );
   }
 
@@ -61,6 +63,9 @@ class HomePageState {
 
   /// The status of the log out operation.
   final HomePageStatus logOutStatus;
+
+  /// The list of shows displayed on the home page.
+  final List<ShowSummaryEntity> showsList;
 
   /// Creates a copy of the current [HomePageState] with the given modifications.
   ///
@@ -76,10 +81,12 @@ class HomePageState {
   HomePageState copyWith({
     HomePageStatus? pageStatus,
     HomePageStatus? logOutStatus,
+    List<ShowSummaryEntity>? showsList,
   }) {
     return HomePageState(
       pageStatus: pageStatus ?? this.pageStatus,
       logOutStatus: logOutStatus ?? this.logOutStatus,
+      showsList: showsList ?? this.showsList,
     );
   }
 }
