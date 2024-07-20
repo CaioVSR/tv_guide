@@ -10,6 +10,7 @@ import 'package:tv_guide/core/theme/app_images_paths.dart';
 import 'package:tv_guide/core/widgets/custom_scaffold.dart';
 import 'package:tv_guide/features/home/presentation/cubit/home_page_cubit.dart';
 import 'package:tv_guide/features/home/presentation/pages/home_page/home_page_initial.dart';
+import 'package:tv_guide/features/home/presentation/pages/home_page/home_page_load_error.dart';
 import 'package:tv_guide/features/home/presentation/pages/home_page/home_page_load_success.dart';
 
 class HomePage extends StatefulWidget {
@@ -38,51 +39,57 @@ class _HomePageState extends State<HomePage> {
           context.goToLogin();
         }
       },
-      builder: (context, state) => CustomScaffold(
-        overlayPortalController: overlayController,
-        appBar: AppBar(
-          leading: Image.asset(AppImagePaths.logoFull, height: 56),
-          centerTitle: true,
-          title: Text(
-            'TV GUIDE',
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium
-                ?.copyWith(color: AppColors.textPrimary, fontWeight: FontWeight.bold),
-          ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GestureDetector(
-                onTap: homePageCubit.logOut,
-                child: const Icon(
-                  HeroiconsOutline.arrowRightOnRectangle,
+      builder: (context, state) {
+        return CustomScaffold(
+          overlayPortalController: overlayController,
+          appBar: AppBar(
+            leading: Image.asset(AppImagePaths.logoFull, height: 56),
+            centerTitle: true,
+            title: Text(
+              'TV GUIDE',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium
+                  ?.copyWith(color: AppColors.textPrimary, fontWeight: FontWeight.bold),
+            ),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: GestureDetector(
+                  onTap: homePageCubit.logOut,
+                  child: const Icon(
+                    HeroiconsOutline.arrowRightOnRectangle,
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-        body: Column(
-          children: [
-            TextFormField(
-              decoration: const InputDecoration(
-                hintText: 'Search',
-                prefixIcon: Icon(HeroiconsOutline.magnifyingGlass),
+            ],
+          ),
+          body: Column(
+            children: [
+              TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'Search',
+                  prefixIcon: Icon(HeroiconsOutline.magnifyingGlass),
+                ),
+                onFieldSubmitted: (value) {
+                  homePageCubit.fetchShow(name: value);
+                },
               ),
-            ),
-            Expanded(
-              child: switch (state.pageStatus) {
-                HomePageStatus.initial => const HomePageInitial(),
-                HomePageStatus.loadInProgress => const SizedBox.shrink(),
-                HomePageStatus.loadSuccess => const HomePageLoadSuccess(
-                    showsList: [],
-                  ),
-                HomePageStatus.loadFailure => const SizedBox.shrink(),
-              },
-            ),
-          ],
-        ),
-      ),
+              const SizedBox(height: 16),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: switch (state.pageStatus) {
+                    HomePageStatus.initial => const HomePageInitial(),
+                    HomePageStatus.loadInProgress => const SizedBox.shrink(),
+                    HomePageStatus.loadSuccess => HomePageLoadSuccess(showsList: state.showsList),
+                    HomePageStatus.loadFailure => const HomePageLoadError(),
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
