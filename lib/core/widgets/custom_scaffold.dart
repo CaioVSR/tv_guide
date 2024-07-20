@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:tv_guide/core/theme/app_colors.dart';
 import 'package:tv_guide/core/widgets/loading_widget.dart';
 
 /// The [CustomScaffold] widget wraps a [Scaffold] and provides an overlay
