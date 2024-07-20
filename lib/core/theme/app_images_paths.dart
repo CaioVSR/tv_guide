@@ -14,4 +14,7 @@ class AppImagePaths {
 
   /// The path to the error image.
   static const String error = 'assets/images/error.png';
+
+  /// The path to the question mark image.
+  static const String questionMark = 'assets/images/question_mark.png';
 }
