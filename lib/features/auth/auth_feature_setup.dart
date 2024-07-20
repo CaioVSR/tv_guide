@@ -18,9 +18,12 @@ class AuthFeatureSetup {
   /// Sets up the dependency injections for the Splash feature.
   ///
   /// This method registers the following dependencies:
-  /// - [CacheDataSource]: The data source for fetching user credentials from the local cache.
-  /// - [SplashRepository]: The repository for managing user credentials.
-  /// - [UserIsLoggedUseCase]: The use case for checking if the user is logged in.
+  /// - [AuthLocalDataSource]: The data source for fetching user credentials from the local cache.
+  /// - [AuthRemoteDataSource]: The data source for fetching user credentials from the remote server.
+  /// - [AuthRepository]: The repository for managing user credentials.
+  /// - [AuthenticateUseCase]: The use case for authenticating a user.
+  /// - [VisibilityCubit]: The cubit for managing the visibility of the password field.
+  /// - [LoginCubit]: The cubit for managing the login state.
   ///
   /// Example usage:
   /// ```dart
