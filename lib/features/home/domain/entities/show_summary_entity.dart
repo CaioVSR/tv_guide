@@ -9,18 +9,12 @@ class ShowSummaryEntity {
   /// parameter is optional.
   ShowSummaryEntity({
     required this.title,
-    required this.imageUrl,
-    this.averageScore,
+    this.imageUrl,
   });
 
   /// The title of the TV show.
   final String title;
 
   /// The URL of the image representing the TV show.
-  final String imageUrl;
-
-  /// The average score of the TV show.
-  ///
-  /// This parameter is optional and can be null if the average score is not available.
-  final double? averageScore;
+  final String? imageUrl;
 }
