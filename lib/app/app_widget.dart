@@ -4,6 +4,7 @@ import 'package:tv_guide/app/app_router.dart';
 import 'package:tv_guide/core/theme/app_colors.dart';
 import 'package:tv_guide/core/theme/app_elevated_button_theme.dart';
 import 'package:tv_guide/core/theme/app_input_decoration_theme.dart';
+import 'package:tv_guide/core/theme/custom_app_bar_theme.dart';
 
 /// A root widget for the application.
 ///
@@ -25,6 +26,7 @@ class AppWidget extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         scaffoldBackgroundColor: AppColors.background,
+        appBarTheme: const CustomAppBarTheme(),
         elevatedButtonTheme: AppElevatedButtonTheme(context),
         inputDecorationTheme: AppInputDecorationTheme(context),
         textSelectionTheme: const TextSelectionThemeData(cursorColor: AppColors.primaryVariant),
