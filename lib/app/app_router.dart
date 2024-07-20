@@ -2,7 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tv_guide/app/app_route_manager.dart';
 import 'package:tv_guide/features/auth/presentation/pages/login_page.dart';
 import 'package:tv_guide/features/home/presentation/pages/details_page.dart';
-import 'package:tv_guide/features/home/presentation/pages/home_page.dart';
+import 'package:tv_guide/features/home/presentation/pages/home_page/home_page.dart';
 import 'package:tv_guide/features/splash/presentation/pages/splash_page.dart';
 
 /// The [AppRouter] class is responsible for setting up the application's routing configuration.

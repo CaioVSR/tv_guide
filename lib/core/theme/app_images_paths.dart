@@ -11,4 +11,7 @@ class AppImagePaths {
 
   /// The path to the logo image without background.
   static const String logoTransparentBg = 'assets/images/logo_no_bg.png';
+
+  /// The path to the error image.
+  static const String error = 'assets/images/error.png';
 }
