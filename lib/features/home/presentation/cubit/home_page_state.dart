@@ -46,6 +46,7 @@ class HomePageState {
     required this.pageStatus,
     required this.logOutStatus,
     required this.showsList,
+    this.selectedShow,
   });
 
   /// Factory constructor for the initial state of the home page.
@@ -67,6 +68,9 @@ class HomePageState {
   /// The list of shows displayed on the home page.
   final List<ShowSummaryEntity> showsList;
 
+  /// The selected show to display its details.
+  final ShowEntity? selectedShow;
+
   /// Creates a copy of the current [HomePageState] with the given modifications.
   ///
   /// This method allows for creating a new [HomePageState] instance with modified values while
@@ -82,11 +86,13 @@ class HomePageState {
     HomePageStatus? pageStatus,
     HomePageStatus? logOutStatus,
     List<ShowSummaryEntity>? showsList,
+    ShowEntity? selectedShow,
   }) {
     return HomePageState(
       pageStatus: pageStatus ?? this.pageStatus,
       logOutStatus: logOutStatus ?? this.logOutStatus,
       showsList: showsList ?? this.showsList,
+      selectedShow: selectedShow,
     );
   }
 }
