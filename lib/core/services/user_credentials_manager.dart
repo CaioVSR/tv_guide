@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:tv_guide/core/models/user_credentials_model.dart';
 import 'package:tv_guide/core/services/local_cache_service.dart';
@@ -33,17 +34,24 @@ class UserCredentialsManager {
   /// await userCredentialsManager.loadUserCredentials();
   /// ```
   Future<void> loadUserCredentials() async {
-    final rawUserData = await _localCacheService.read(key: _userKey);
+    try {
+      final rawUserData = await _localCacheService.read(key: _userKey);
 
-    if (rawUserData != null && rawUserData.isNotEmpty) {
-      final decodedData = jsonDecode(rawUserData);
+      if (rawUserData != null && rawUserData.isNotEmpty) {
+        final decodedData = jsonDecode(rawUserData);
+        
+        if (decodedData is! Map<String, dynamic>) {
+          throw Exception('Invalid user data');
+        }
 
-      if (decodedData is Map<String, dynamic>) {
         _userCredentials = UserCredentialsModel.fromJson(decodedData);
       } else {
-        // If there is an error in decoding, delete the corrupted data
         await _localCacheService.delete(key: _userKey);
       }
+    } catch (e) {
+      log('Error loading user credentials: $e');
+
+      await _localCacheService.delete(key: _userKey);
     }
   }
 
