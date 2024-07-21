@@ -22,7 +22,8 @@ class AppInjections {
       ..registerLazySingleton<Dio>(
         () => Dio(
           BaseOptions(
-            baseUrl: 'https://api.tvmaze.com',
+            // ignore: avoid_redundant_argument_values
+            baseUrl: const String.fromEnvironment('API_BASE_URL'),
           ),
         ),
       );
