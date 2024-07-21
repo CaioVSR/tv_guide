@@ -14,16 +14,15 @@ void main() {
 
     test('FlutterSecureStorage is registered', () {
       final flutterSecureStorage = injector.get<FlutterSecureStorage>();
-      
+
       expect(flutterSecureStorage, isA<FlutterSecureStorage>());
     });
 
-        test('LocalCacheService is registered', () {
+    test('LocalCacheService is registered', () {
       final localCacheService = injector.get<LocalCacheService>();
 
       expect(localCacheService, isA<LocalCacheService>());
     });
-
 
     test('UserCredentialsManager is registered', () {
       final userCredentialsManager = injector.get<UserCredentialsManager>();

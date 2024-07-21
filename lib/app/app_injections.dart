@@ -27,12 +27,4 @@ class AppInjections {
         ),
       );
   }
-
-  /// Disposes of the dependency injections.
-  ///
-  /// This method disposes of the dependencies used across the application.
-  ///
-  static void disposeInjections() {
-    GetIt.I.popScope();
-  }
 }
