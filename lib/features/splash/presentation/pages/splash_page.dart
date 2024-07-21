@@ -22,13 +22,7 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     pageCubit.init();
   }
-
-  @override
-  void dispose() {
-    pageCubit.close();
-    super.dispose();
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     return BlocListener<SplashPageCubit, SplashPageState>(

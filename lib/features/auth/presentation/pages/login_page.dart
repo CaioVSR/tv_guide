@@ -30,8 +30,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    loginCubit.close();
-    visibilityCubit.close();
     emailController.dispose();
     passwordController.dispose();
     super.dispose();

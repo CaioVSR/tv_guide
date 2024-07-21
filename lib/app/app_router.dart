@@ -34,8 +34,11 @@ class AppRouter {
         path: '/',
         builder: (context, state) {
           SplashFeatureSetup.setupInjections();
-
           return const SplashPage();
+        },
+        onExit: (context, state) {
+          SplashFeatureSetup.dispose();
+          return true;
         },
       ),
       GoRoute(
@@ -43,8 +46,11 @@ class AppRouter {
         path: '/${AppRouteManager.loginRouteName}',
         builder: (context, state) {
           AuthFeatureSetup.setupInjections();
-
           return const LoginPage();
+        },
+        onExit: (context, state) {
+          AuthFeatureSetup.dispose();
+          return true;
         },
       ),
       GoRoute(
@@ -52,7 +58,6 @@ class AppRouter {
         path: '/${AppRouteManager.homeRouteName}',
         builder: (context, state) {
           HomeFeatureSetup.setupInjections();
-
           return const HomePage();
         },
         onExit: (context, state) async {
