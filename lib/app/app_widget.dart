@@ -24,12 +24,13 @@ class AppWidget extends StatelessWidget {
       title: 'Tv Guide',
       routerConfig: AppRouter.routerConfig,
       theme: ThemeData(
-        useMaterial3: true,
+        brightness: Brightness.light,
         scaffoldBackgroundColor: AppColors.background,
         appBarTheme: const CustomAppBarTheme(),
         elevatedButtonTheme: AppElevatedButtonTheme(context),
         inputDecorationTheme: AppInputDecorationTheme(context),
         textSelectionTheme: const TextSelectionThemeData(cursorColor: AppColors.primaryVariant),
+        bottomSheetTheme: const BottomSheetThemeData(backgroundColor: AppColors.background),
         textTheme: GoogleFonts.poppinsTextTheme(),
       ),
     );

@@ -35,23 +35,23 @@ class AppColors {
   /// TEXT COLORS
 
   /// The primary text color, used for main content.
-  static const Color textPrimary = Color(0xFF000000);
+  static const Color textPrimary = Color(0xFFFFFFFF);
 
   /// A secondary text color, used for less prominent text.
-  static const Color textSecondary = Color(0xFF757575);
+  static const Color textSecondary = Color(0xFFA0A0A0);
 
   /// BACKGROUND COLORS
 
   /// The main background color of the app.
-  static const Color background = Color(0xffeef3f5);
+  static const Color background = Color(0xFF2d2d30);
 
   /// A variant background color, used for cards and surfaces.
-  static const Color backgroundVariant = Color(0xFFF5F5F5);
+  static const Color backgroundVariant = Color(0xFF1e1e1e);
 
   /// ERROR COLORS
 
   /// The error color, used for indicating errors and important warnings.
-  static const Color error = Color(0xFFB00020);
+  static const Color error = Color(0xFFEA6D7E); // Red
 
   /// SUCCESS COLORS
 

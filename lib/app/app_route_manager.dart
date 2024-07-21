@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tv_guide/features/home/domain/entities/show_entity.dart';
 
 /// A utility class for managing app routes using the `go_router` package.
 ///
@@ -52,5 +53,5 @@ extension AppRouteManagerX on BuildContext {
   void goToHome() => goNamed(AppRouteManager.homeRouteName);
 
   /// Navigates to the details screen with the provided details.
-  void goToShowDetails(Object details) => goNamed(AppRouteManager.showDetailsRouteName, extra: details);
+  void goToShowDetails(ShowEntity details) => goNamed(AppRouteManager.showDetailsRouteName, extra: details);
 }

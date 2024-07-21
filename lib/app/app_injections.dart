@@ -19,7 +19,12 @@ class AppInjections {
       ..registerSingleton<FlutterSecureStorage>(const FlutterSecureStorage())
       ..registerSingleton<LocalCacheService>(LocalCacheService(GetIt.I.get()))
       ..registerSingleton<UserCredentialsManager>(UserCredentialsManager(GetIt.I.get()))
-      ..registerLazySingleton<Dio>(Dio.new);
-
+      ..registerLazySingleton<Dio>(
+        () => Dio(
+          BaseOptions(
+            baseUrl: 'https://api.tvmaze.com',
+          ),
+        ),
+      );
   }
 }

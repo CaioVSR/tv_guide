@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tv_guide/app/app_route_manager.dart';
 import 'package:tv_guide/features/auth/auth_feature_setup.dart';
 import 'package:tv_guide/features/auth/presentation/pages/login_page.dart';
+import 'package:tv_guide/features/home/domain/entities/show_entity.dart';
 import 'package:tv_guide/features/home/home_feature_setup.dart';
 import 'package:tv_guide/features/home/presentation/pages/details_page.dart';
 import 'package:tv_guide/features/home/presentation/pages/home_page/home_page.dart';
@@ -62,7 +63,7 @@ class AppRouter {
           GoRoute(
             name: AppRouteManager.showDetailsRouteName,
             path: '$AppRouteManager.showDetailsRouteName',
-            builder: (context, state) => DetailsPage(details: state.extra),
+            builder: (context, state) => DetailsPage(details: state.extra! as ShowEntity),
           ),
         ],
       ),
