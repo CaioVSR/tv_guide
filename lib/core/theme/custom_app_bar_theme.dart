@@ -13,5 +13,6 @@ class CustomAppBarTheme extends AppBarTheme {
       : super(
           backgroundColor: AppColors.background,
           surfaceTintColor: AppColors.background,
+          foregroundColor: AppColors.secondary,
         );
 }

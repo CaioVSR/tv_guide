@@ -81,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Hero(
                     tag: AppImagePaths.logoFull,
                     child: Image.asset(
-                      AppImagePaths.logoFull,
+                      AppImagePaths.logoTransparentBg,
                       height: 148,
                     ),
                   ),
@@ -104,6 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 32),
                 TextFormField(
                   controller: emailController,
+                  style: const TextStyle(color: AppColors.textPrimary),
                   keyboardType: TextInputType.emailAddress,
                   validator: FieldsValidators.emailValidator,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -119,6 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                   builder: (context, state) {
                     return TextFormField(
                       controller: passwordController,
+                      style: const TextStyle(color: AppColors.textPrimary),
                       obscureText: state.obscurePassword,
                       validator: FieldsValidators.passwordValidator,
                       autovalidateMode: AutovalidateMode.onUserInteraction,

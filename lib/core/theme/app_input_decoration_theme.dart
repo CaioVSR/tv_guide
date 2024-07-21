@@ -11,6 +11,7 @@ class AppInputDecorationTheme extends InputDecorationTheme {
   ///
   AppInputDecorationTheme(BuildContext context)
       : super(
+          hintStyle: const TextStyle(color: AppColors.textSecondary),
           floatingLabelStyle: Theme.of(context).textTheme.labelLarge?.copyWith(color: AppColors.textSecondary),
           fillColor: Colors.transparent,
           filled: true,
@@ -28,16 +29,18 @@ class AppInputDecorationTheme extends InputDecorationTheme {
                 color: AppColors.error,
               ),
           enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors.textSecondary),
+            borderSide: BorderSide(color: AppColors.secondary),
             borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
           focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors.textSecondary),
+            borderSide: BorderSide(color: AppColors.secondary),
             borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
           border: const OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors.textSecondary),
+            borderSide: BorderSide(color: AppColors.secondary),
             borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
+          iconColor: AppColors.secondary,
+          prefixIconColor: AppColors.secondary,
         );
 }
