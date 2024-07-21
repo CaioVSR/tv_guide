@@ -37,7 +37,7 @@ enum HomePageStatus {
 ///
 /// The [HomePageState] class holds the current status of the home page. It is immutable
 /// and can be copied with modifications using the [copyWith] method.
-class HomePageState {
+class HomePageState extends Equatable {
   /// Creates an instance of [HomePageState].
   ///
   /// The [pageStatus] parameter is required to indicate the current status of the home page.
@@ -95,4 +95,12 @@ class HomePageState {
       selectedShow: selectedShow,
     );
   }
+
+  @override
+  List<Object?> get props => [
+        pageStatus,
+        logOutStatus,
+        showsList,
+        selectedShow,
+      ];
 }

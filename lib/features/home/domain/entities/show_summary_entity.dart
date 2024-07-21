@@ -1,9 +1,11 @@
+import 'package:equatable/equatable.dart';
+
 /// Entity class representing a summary of a TV show.
 ///
 /// The [ShowSummaryEntity] class provides a summary of a TV show, including
 /// the title, image URL.
 ///
-class ShowSummaryEntity {
+class ShowSummaryEntity extends Equatable {
   /// Creates an instance of [ShowSummaryEntity].
   ///
   /// The [title] parameter is required and represents the title of the TV show.
@@ -23,4 +25,11 @@ class ShowSummaryEntity {
 
   /// The ID of the TV show.
   final int id;
+
+  @override
+  List<Object?> get props => [
+        id,
+        title,
+        imageUrl,
+      ];
 }

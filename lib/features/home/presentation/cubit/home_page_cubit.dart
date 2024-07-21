@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:tv_guide/features/home/domain/entities/show_entity.dart';
 import 'package:tv_guide/features/home/domain/entities/show_summary_entity.dart';
 import 'package:tv_guide/features/home/domain/use_cases/fetch_show_use_case.dart';
