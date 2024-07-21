@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:equatable/equatable.dart';
 import 'package:tv_guide/features/auth/domain/exceptions/authentication_exceptions.dart';
 import 'package:tv_guide/features/auth/domain/use_cases/authenticate_use_case.dart';
 

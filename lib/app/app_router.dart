@@ -62,7 +62,7 @@ class AppRouter {
         routes: [
           GoRoute(
             name: AppRouteManager.showDetailsRouteName,
-            path: '$AppRouteManager.showDetailsRouteName',
+            path: AppRouteManager.showDetailsRouteName,
             builder: (context, state) => DetailsPage(details: state.extra! as ShowEntity),
           ),
         ],

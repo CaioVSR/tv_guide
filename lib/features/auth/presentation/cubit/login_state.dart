@@ -5,8 +5,10 @@ part of 'login_cubit.dart';
 /// The [LoginState] class serves as the base class for all states
 /// related to the login process. It is immutable and sealed to ensure
 /// that all possible states are defined within this file.
-@immutable
-sealed class LoginState {}
+sealed class LoginState extends Equatable {
+  @override
+  List<Object?> get props => [];
+}
 
 /// Initial state of the login process.
 ///
@@ -43,4 +45,9 @@ final class LoginAuthenticationFailure extends LoginState {
 
   /// An optional message describing the authentication failure.
   final String? message;
+
+  @override
+  List<Object?> get props => [
+        message,
+      ];
 }

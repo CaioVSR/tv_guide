@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:equatable/equatable.dart';
 
 part 'visibility_state.dart';
 
@@ -10,15 +10,15 @@ part 'visibility_state.dart';
 class VisibilityCubit extends Cubit<VisibilityState> {
   /// Creates an instance of [VisibilityCubit].
   ///
-  /// Initializes the state with [VisibilityInitial] where the password
+  /// Initializes the state with [VisibilityState] where the password
   /// field is obscured by default.
-  VisibilityCubit() : super(const VisibilityInitial(obscurePassword: true));
+  VisibilityCubit() : super(const VisibilityState(obscurePassword: true));
 
   /// Toggles the visibility of the password field.
   ///
   /// This method switches the `obscurePassword` state between true and false,
   /// effectively toggling the password visibility in the UI.
   void toggleVisibility() {
-    emit(VisibilityInitial(obscurePassword: !state.obscurePassword));
+    emit(VisibilityState(obscurePassword: !state.obscurePassword));
   }
 }
