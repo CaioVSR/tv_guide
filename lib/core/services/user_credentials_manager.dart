@@ -39,12 +39,8 @@ class UserCredentialsManager {
 
       if (rawUserData != null && rawUserData.isNotEmpty) {
         final decodedData = jsonDecode(rawUserData);
-        
-        if (decodedData is! Map<String, dynamic>) {
-          throw Exception('Invalid user data');
-        }
 
-        _userCredentials = UserCredentialsModel.fromJson(decodedData);
+        _userCredentials = UserCredentialsModel.fromJson(decodedData as Map<String, dynamic>);
       } else {
         await _localCacheService.delete(key: _userKey);
       }

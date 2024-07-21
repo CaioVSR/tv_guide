@@ -40,7 +40,7 @@ void main() {
     });
 
     test('loadUserCredentials should load some corrupted data, deleting the cache data', () async {
-      const corruptedJson = '{[]}';
+      const corruptedJson = 'corrupted-json';
 
       when(() => mockLocalCacheService.read(key: any(named: 'key')))
           .thenAnswer((_) async => Future.value(corruptedJson));
