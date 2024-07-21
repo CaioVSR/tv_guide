@@ -1,3 +1,4 @@
+import 'package:tv_guide/features/home/domain/entities/show_entity.dart';
 import 'package:tv_guide/features/home/domain/entities/show_summary_entity.dart';
 
 /// Abstract repository class for fetching TV shows.
@@ -13,4 +14,14 @@ abstract class ShowsRepository {
   /// Returns a [Future] that completes with a list of [ShowSummaryEntity] objects
   /// representing the fetched TV shows.
   Future<List<ShowSummaryEntity>> fetchShows({required String name});
+
+  /// Fetches TV shows by ID.
+  /// 
+  /// The [id] parameter is required and is used to search for a TV show
+  /// with the specified ID.
+  /// 
+  /// Returns a [Future] that completes with a [ShowSummaryEntity] object
+  /// representing the fetched TV show.
+  /// 
+  Future<ShowEntity> fetchShowById({required int id});
 }

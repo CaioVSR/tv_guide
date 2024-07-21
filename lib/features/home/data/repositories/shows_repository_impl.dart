@@ -1,5 +1,7 @@
-import 'package:tv_guide/features/home/data/models/show_model.dart';
+import 'package:tv_guide/features/home/data/models/search_response_model.dart';
+import 'package:tv_guide/features/home/data/models/show_response_model.dart';
 import 'package:tv_guide/features/home/data/remote_data_source/shows_data_source.dart';
+import 'package:tv_guide/features/home/domain/entities/show_entity.dart';
 import 'package:tv_guide/features/home/domain/entities/show_summary_entity.dart';
 import 'package:tv_guide/features/home/domain/repositories/shows_repository.dart';
 
@@ -21,7 +23,7 @@ class ShowsRepositoryImpl implements ShowsRepository {
   ///
   /// This method performs a request to the remote data source with the specified
   /// [name] parameter to search for TV shows. If the request is successful,
-  /// it maps the raw data to a list of [ShowModel] objects and then converts
+  /// it maps the raw data to a list of [SearchResponseModel] objects and then converts
   /// them to a list of [ShowSummaryEntity] objects.
   ///
   /// Returns a [Future] that completes with a list of [ShowSummaryEntity] objects.
@@ -35,19 +37,42 @@ class ShowsRepositoryImpl implements ShowsRepository {
       final rawData = response.data as List;
 
       final showsList = rawData.map((e) {
-        return ShowModel.fromJson(e as Map<String, dynamic>);
+        return SearchResponseModel.fromJson(e as Map<String, dynamic>);
       }).toList();
 
       return showsList
           .map(
             (e) => ShowSummaryEntity(
+              id: e.show.id,
               title: e.show.name ?? '',
-              imageUrl: e.show.image?.mediumSizeUrl,
+              imageUrl: e.show.image?.medium ?? e.show.image?.original ?? '',
             ),
           )
           .toList();
     } else {
       throw Exception('Failed to fetch shows');
+    }
+  }
+
+  @override
+  Future<ShowEntity> fetchShowById({required int id}) async {
+    final response = await _dataSource.fetchShowById(id: id);
+
+    if (response.statusCode == 200) {
+      final rawData = response.data as Map<String, dynamic>;
+
+      final show = ShowResponseModel.fromJson(rawData);
+
+      return ShowEntity(
+        name: show.name ?? '',
+        status: show.status ?? '',
+        rating: show.rating?.average,
+        summary: show.summary ?? '',
+        genres: show.genres ?? [],
+        image: show.image?.original ?? '',
+      );
+    } else {
+      throw Exception('Failed to fetch show');
     }
   }
 }
