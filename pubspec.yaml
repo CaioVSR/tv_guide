@@ -20,6 +20,7 @@ dependencies:
   go_router: ^14.2.1
   google_fonts: ^6.2.1
   heroicons_flutter: ^0.3.0
+  html_tags_cleaner: ^0.0.3
   loading_animation_widget: ^1.2.1
   meta: ^1.12.0
 

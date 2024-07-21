@@ -4,6 +4,7 @@ import 'package:tv_guide/features/home/data/repositories/shows_repository_impl.d
 import 'package:tv_guide/features/home/data/repositories/user_repository_impl.dart';
 import 'package:tv_guide/features/home/domain/repositories/shows_repository.dart';
 import 'package:tv_guide/features/home/domain/repositories/user_repository.dart';
+import 'package:tv_guide/features/home/domain/use_cases/fetch_show_use_case.dart';
 import 'package:tv_guide/features/home/domain/use_cases/fetch_shows_use_case.dart';
 import 'package:tv_guide/features/home/domain/use_cases/log_out_use_case.dart';
 import 'package:tv_guide/features/home/presentation/cubit/home_page_cubit.dart';
@@ -43,9 +44,16 @@ class HomeFeatureSetup {
       // USE CASES
       ..registerLazySingleton<LogOutUseCase>(() => LogOutUseCase(GetIt.I.get()))
       ..registerLazySingleton<FetchShowsUseCase>(() => FetchShowsUseCase(GetIt.I.get()))
+      ..registerLazySingleton<FetchShowUseCase>(() => FetchShowUseCase(GetIt.I.get()))
 
       // CUBITS
-      ..registerLazySingleton<HomePageCubit>(() => HomePageCubit(GetIt.I.get(), GetIt.I.get()));
+      ..registerLazySingleton<HomePageCubit>(
+        () => HomePageCubit(
+          GetIt.I.get(),
+          GetIt.I.get(),
+          GetIt.I.get(),
+        ),
+      );
   }
 
   /// Disposes of the current scope of the dependency injections.

@@ -9,10 +9,12 @@ import 'package:tv_guide/features/home/domain/entities/show_summary_entity.dart'
 class HomePageLoadSuccess extends StatelessWidget {
   const HomePageLoadSuccess({
     required this.showsList,
+    required this.onShowSelected,
     super.key,
   });
 
   final List<ShowSummaryEntity> showsList;
+  final Future<void> Function(int) onShowSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -45,47 +47,44 @@ class HomePageLoadSuccess extends StatelessWidget {
       itemBuilder: (context, index) {
         final show = showsList[index];
 
-        return Container(
-          height: 80,
-          margin: const EdgeInsets.symmetric(vertical: 8),
-          clipBehavior: Clip.antiAlias,
-          foregroundDecoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: AppColors.textSecondary,
+        return GestureDetector(
+          onTap: () => onShowSelected(show.id),
+          child: Container(
+            height: 80,
+            margin: const EdgeInsets.symmetric(vertical: 8),
+            clipBehavior: Clip.antiAlias,
+            foregroundDecoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: AppColors.textSecondary,
+              ),
             ),
-          ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Row(
-              children: [
-                if (show.imageUrl != null)
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 16),
+              child: Row(
+                children: [
                   CachedNetworkImage(
                     imageUrl: show.imageUrl!,
                     width: imageWidth,
                     fit: BoxFit.cover,
-                  )
-                else
-                  Image.asset(
-                    AppImagePaths.questionMark,
-                    width: imageWidth,
-                    height: 80,
-                    fit: BoxFit.cover,
+                    placeholder: (context, url) => Image.asset(AppImagePaths.questionMark),
+                    errorWidget: (context, url, error) => Image.asset(AppImagePaths.questionMark),
                   ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Text(
-                    show.title,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: AppColors.textSecondary,
-                          fontWeight: FontWeight.bold,
-                        ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Text(
+                      show.title,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            color: AppColors.textPrimary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );

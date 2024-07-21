@@ -35,6 +35,10 @@ class _HomePageState extends State<HomePage> {
           overlayController.hide();
         }
 
+        if (state.pageStatus.isLoadSuccess && state.selectedShow != null) {
+          context.goToShowDetails(state.selectedShow!);
+        }
+
         if (state.logOutStatus.isLoadSuccess) {
           context.goToLogin();
         }
@@ -43,23 +47,21 @@ class _HomePageState extends State<HomePage> {
         return CustomScaffold(
           overlayPortalController: overlayController,
           appBar: AppBar(
-            leading: Image.asset(AppImagePaths.logoFull, height: 56),
+            leading: Image.asset(AppImagePaths.logoTransparentBg, height: 56),
             centerTitle: true,
             title: Text(
               'TV GUIDE',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium
-                  ?.copyWith(color: AppColors.textPrimary, fontWeight: FontWeight.bold),
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: AppColors.textPrimary,
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             actions: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: GestureDetector(
                   onTap: homePageCubit.logOut,
-                  child: const Icon(
-                    HeroiconsOutline.arrowRightOnRectangle,
-                  ),
+                  child: const Icon(HeroiconsOutline.arrowRightOnRectangle),
                 ),
               ),
             ],
@@ -67,23 +69,38 @@ class _HomePageState extends State<HomePage> {
           body: Column(
             children: [
               TextFormField(
+                style: const TextStyle(color: AppColors.textPrimary),
                 decoration: const InputDecoration(
                   hintText: 'Search',
                   prefixIcon: Icon(HeroiconsOutline.magnifyingGlass),
                 ),
                 onFieldSubmitted: (value) {
-                  homePageCubit.fetchShow(name: value);
+                  homePageCubit.fetchShows(name: value);
                 },
               ),
               const SizedBox(height: 16),
               Expanded(
                 child: SingleChildScrollView(
-                  child: switch (state.pageStatus) {
-                    HomePageStatus.initial => const HomePageInitial(),
-                    HomePageStatus.loadInProgress => const SizedBox.shrink(),
-                    HomePageStatus.loadSuccess => HomePageLoadSuccess(showsList: state.showsList),
-                    HomePageStatus.loadFailure => const HomePageLoadError(),
-                  },
+                  child: Builder(
+                    builder: (context) {
+                      if (state.pageStatus.isInitial) {
+                        return const HomePageInitial();
+                      }
+
+                      if (state.pageStatus.isLoadFailure) {
+                        return const HomePageLoadError();
+                      }
+
+                      if (state.pageStatus.isLoadInProgress && state.showsList.isEmpty) {
+                        return const SizedBox.shrink();
+                      }
+
+                      return HomePageLoadSuccess(
+                        showsList: state.showsList,
+                        onShowSelected: homePageCubit.fetchShowById,
+                      );
+                    },
+                  ),
                 ),
               ),
             ],
