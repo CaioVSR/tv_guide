@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:tv_guide/core/models/user_credentials_model.dart';
 import 'package:tv_guide/features/auth/data/local_data_source/auth_local_data_source.dart';
 import 'package:tv_guide/features/auth/data/remote_data_source/auth_remote_data_source.dart';
 import 'package:tv_guide/features/auth/data/repositories/auth_repository_impl.dart';

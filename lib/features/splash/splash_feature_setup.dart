@@ -28,7 +28,7 @@ class SplashFeatureSetup {
     GetIt.I
       ..pushNewScope()
       // DATA SOURCES
-      ..registerLazySingleton<CacheDataSource>(() => CacheDataSourceImp(GetIt.I.get()))
+      ..registerLazySingleton<CacheDataSource>(() => CacheDataSourceImpl(GetIt.I.get()))
 
       // REPOSITORIES
       ..registerLazySingleton<SplashRepository>(() => SplashRepositoryImpl(GetIt.I.get()))

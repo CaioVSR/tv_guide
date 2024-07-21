@@ -10,9 +10,9 @@ abstract class CacheDataSource {
 }
 
 /// A concrete implementation of [CacheDataSource] that uses [UserCredentialsManager] to fetch user credentials from the local cache.
-class CacheDataSourceImp implements CacheDataSource {
-  /// Creates an instance of [CacheDataSourceImp] with the provided [UserCredentialsManager].
-  const CacheDataSourceImp(this._userCredentialsManager);
+class CacheDataSourceImpl implements CacheDataSource {
+  /// Creates an instance of [CacheDataSourceImpl] with the provided [UserCredentialsManager].
+  const CacheDataSourceImpl(this._userCredentialsManager);
 
   /// An instance of [UserCredentialsManager] used to manage user credentials.
   final UserCredentialsManager _userCredentialsManager;
