@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 ///
 /// The [ShowsDataSource] class defines the contract for fetching TV shows
 /// from a remote API.
+///
 abstract class ShowsDataSource {
   /// Fetches TV shows by name.
   ///
@@ -11,7 +12,17 @@ abstract class ShowsDataSource {
   /// with the specified name.
   ///
   /// Returns a [Future] that completes with the [Response] containing the fetched data.
+  ///
   Future<Response<dynamic>> fetchShows({required String name});
+
+  /// Fetches TV shows by ID.
+  ///
+  /// The [id] parameter is required and is used to search for a TV show
+  /// with the specified ID.
+  ///
+  /// Returns a [Future] that completes with the [Response] containing the fetched data.
+  ///
+  Future<Response<dynamic>> fetchShowById({required int id});
 }
 
 /// Implementation of [ShowsDataSource] using the Dio HTTP client.
@@ -35,9 +46,16 @@ class ShowsDataSourceImpl implements ShowsDataSource {
   ///
   /// Returns a [Future] that completes with the [Response] containing the fetched data.
   @override
-  Future<Response<dynamic>> fetchShows({required String name}) async {
-    final response = await _client.get<dynamic>('https://api.tvmaze.com/search/shows?q=$name');
-    
-    return response;
-  }
+  Future<Response<dynamic>> fetchShows({required String name}) async =>
+      _client.get<dynamic>('/search/shows?q=$name');
+
+  /// Fetches TV shows by ID.
+  ///
+  /// This method performs a GET request to the TVMaze API with the specified
+  /// [id] parameter to search for a TV show. The response containing the
+  /// fetched data is returned.
+  ///
+  /// Returns a [Future] that completes with the [Response] containing the fetched data.
+  @override
+  Future<Response<dynamic>> fetchShowById({required int id}) async => _client.get<dynamic>('/shows/$id');
 }
