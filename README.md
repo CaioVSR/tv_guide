@@ -128,7 +128,7 @@ For your convenience a `makefile` is provided to automate the process of running
 
 Or you can run the following commands manually:
 ```sh
-  flutter test --coverage
+  flutter test --dart-define-from-file=secrets.json --coverage
   lcov --remove coverage/lcov.info 'lib/*' -o coverage/lcov.info
   genhtml coverage/lcov.info -o coverage/html
 ```
