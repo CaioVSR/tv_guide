@@ -9,7 +9,7 @@ class ShowEntity extends Equatable{
   /// Creates an instance of [ShowEntity].
   /// 
   /// The [name], [genres], [status], [rating], [image], and [summary] parameters are required.
-  ShowEntity({
+  const ShowEntity({
     required this.name,
     required this.genres,
     required this.status,

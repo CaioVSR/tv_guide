@@ -108,12 +108,12 @@ void main() {
   group('fetchShows', () {
     const testName = 'Test Show';
     final testShows = [
-      ShowSummaryEntity(
+      const ShowSummaryEntity(
         id: 1,
         title: 'Test Show 1',
         imageUrl: 'test_image_url_1',
       ),
-      ShowSummaryEntity(
+      const ShowSummaryEntity(
         id: 2,
         title: 'Test Show 2',
         imageUrl: 'test_image_url_2',
@@ -155,9 +155,9 @@ void main() {
 
   group('fetchShowById', () {
     const testId = 1;
-    final testShow = ShowEntity(
+    const testShow = ShowEntity(
       name: 'Test Show',
-      genres: const ['Drama'],
+      genres: ['Drama'],
       status: 'Running',
       rating: 8.5,
       image: 'test_image_url',

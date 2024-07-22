@@ -17,12 +17,12 @@ void main() {
 
   const testName = 'Test Show';
   final testShows = [
-    ShowSummaryEntity(
+    const ShowSummaryEntity(
       id: 1,
       title: 'Test Show 1',
       imageUrl: 'test_image_url_1',
     ),
-    ShowSummaryEntity(
+    const ShowSummaryEntity(
       id: 2,
       title: 'Test Show 2',
       imageUrl: 'test_image_url_2',

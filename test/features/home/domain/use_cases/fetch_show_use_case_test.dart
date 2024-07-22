@@ -16,7 +16,7 @@ void main() {
   });
 
   const testId = 1;
-  final testShow = ShowEntity(
+  const testShow = ShowEntity(
     name: 'Test Show',
     genres: ['Drama'],
     status: 'Running',

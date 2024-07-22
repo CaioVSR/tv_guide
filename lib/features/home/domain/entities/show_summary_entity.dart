@@ -11,7 +11,7 @@ class ShowSummaryEntity extends Equatable {
   /// The [title] parameter is required and represents the title of the TV show.
   /// The [imageUrl] parameter is optional and represents the URL of the image
   ///
-  ShowSummaryEntity({
+  const ShowSummaryEntity({
     required this.id,
     required this.title,
     this.imageUrl,
